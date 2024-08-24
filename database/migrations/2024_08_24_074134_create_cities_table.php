@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('slug');
+            $table->softDeletes(); //hanya menghapus pada ui tidak menghapus di database
             $table->timestamps();
         });
     }
