@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreHotelRequest;
+use App\Models\City;
+use App\Models\Country;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class HotelController extends Controller
 {
@@ -22,15 +27,41 @@ class HotelController extends Controller
      */
     public function create()
     {
-        //
+        //1 import Country model
+        //2 import City model
+        $countries = Country::orderByDesc('id')->get();
+        $cities = City::orderByDesc('id')->get();
+        return view('admin.hotels.create', compact('countries', 'cities'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreHotelRequest $request)
     {
         //
+        DB::transaction(function ()  use ($request){
+            $validate = $request->validated();
+
+            if($request->hasFile('thumbnail')){
+                $thumbnailPath = 
+                $request->file('thumbnail')->store('thumbnails/' . date('Y/m/d'), 'public');
+                $validate['thumbnail'] = $thumbnailPath;
+            }
+
+            $validate['slug'] = Str::slug($validate['name']);
+            
+            $hotel = Hotel::create($validate);
+
+            if($request->hasFile('photos')){
+                foreach ($request->file('photos') as $photo) {
+                    $photoPath = $photo->store('photos/' . date('Y/m/d'), 'public');
+                    $hotel->photos()->create([
+                        'photo' => $photoPath
+                    ]);
+                }
+            }
+        });
     }
 
     /**

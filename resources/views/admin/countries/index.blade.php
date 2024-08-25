@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Manage Countries') }}
             </h2>
-            <a href=" {{route('admin.countries.index')}}" class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
+            <a href=" {{route('admin.countries.create')}}" class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
                 Add New
             </a>
         </div>

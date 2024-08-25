@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCountryRequest;
 use App\Models\Country;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CountryController extends Controller
 {
@@ -22,14 +24,23 @@ class CountryController extends Controller
     public function create()
     {
         //
+        return view('admin.countries.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCountryRequest $request)
     {
-        //
+       //1 validasi data
+       //2 mulai insert ke dalam table di database
+       //3 mengembalikan pengguna ke halaman index (list of country)
+        DB::transaction(function() use ($request){
+            $validate = $request->validated();
+            $validate['slug'] = Str::slug($validate['name']);
+            $newData = Country::create($validate);
+        });
+        return redirect()->route('admin.countries.index');
     }
 
     /**
