@@ -27,6 +27,7 @@ class StoreHotelRequest extends FormRequest
             'address' => ['required', 'string', 'max:255'],
             'thumbnail' => ['required', 'image' , 'mimes:png,jpg,jpeg'],
             'city_id' => ['required', 'integer'],
+            'country_id' => ['required', 'integer'],
             'star_level'=> ['required', 'integer'],
             'photos.*' => ['required', 'image', 'mimes:png,jpg,jpeg'],
         ];

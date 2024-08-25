@@ -30,7 +30,7 @@
                     <div  class="hidden md:flex flex-col">
                         <p class="text-slate-500 text-sm">Price</p>
                         <h3 class="text-indigo-950 text-xl font-bold">
-                            Rp {{number_format($hotel->getLowesPrice(),0,',','.')}}/night
+                            Rp {{number_format($hotel->getLowesRoomPrice(),0,',','.')}}/night
                         </h3>
                     </div>
                     <div class="hidden md:flex flex-row items-center gap-x-3">
