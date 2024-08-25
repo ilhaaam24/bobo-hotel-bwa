@@ -22,7 +22,7 @@ class CityController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.cities.create');
     }
 
     /**
@@ -47,6 +47,7 @@ class CityController extends Controller
     public function edit(City $city)
     {
         //
+        return view('admin.cities.edit',compact('city'));
     }
 
     /**
