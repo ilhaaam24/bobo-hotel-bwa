@@ -34,11 +34,11 @@ Route::middleware('auth')->group(function () {
             Route::resource('hotels', HotelController::class);
         });
         Route::middleware('can:manage hotels')->group(function(){
-           Route::get('/add/room/{hotel:slug}', [HotelRoomController::class, 'create'])->name('hotel_room.create');
-           Route::post('/add/room/{hotel:slug}/store', [HotelRoomController::class, 'store'])->name('hotel_room.store');
-           Route::get('/hotel/{hotel:slug}/room/{hotel_room}', [HotelRoomController::class, 'edit'])->name('hotel_room.edit');
-           Route::put('/room/hotel_room/update', [HotelRoomController::class, 'update'])->name('hotel_room.update');
-           Route::delete('/hotel/{hotel:slug}/delete/{hotel_room}', [HotelRoomController::class, 'delete'])->name('hotel_room.delete');
+           Route::get('/add/room/{hotel:slug}', [HotelRoomController::class, 'create'])->name('hotel_rooms.create');
+           Route::post('/add/room/{hotel:slug}/store', [HotelRoomController::class, 'store'])->name('hotel_rooms.store');
+           Route::get('/hotel/{hotel:slug}/room/{hotel_room}', [HotelRoomController::class, 'edit'])->name('hotel_rooms.edit');
+           Route::put('/room/hotel_room/update', [HotelRoomController::class, 'update'])->name('hotel_rooms.update');
+           Route::delete('/hotel/{hotel:slug}/delete/{hotel_room}', [HotelRoomController::class, 'delete'])->name('hotel_rooms.delete');
         });
 
         Route::middleware('can:manage hotel bookings')->group(function(){

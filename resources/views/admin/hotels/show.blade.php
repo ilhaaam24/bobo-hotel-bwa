@@ -60,7 +60,7 @@
                 </div>
 
                 <div>
-                    <iframe src="https://www.google.com/maps/embed?{{$hotel->link_gmaps}}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?{{$hotel->link_gmaps}}" width="500" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     <h3 class="text-indigo-950 text-xl font-bold">Address</h3>
                 <p>
                     {{$hotel->address}}
@@ -70,27 +70,29 @@
                 <hr class="my-5">
                 <div class="flex flex-row justify-between items-center">
                     <h3 class="text-indigo-950 text-xl font-bold">Rooms Available</h3>
-                    <a href=" " class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
+                    <a href="{{ route('admin.hotel_rooms.create', $hotel->slug) }} " class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
                         Add New Room
                     </a>
                 </div>
- 
+                
+
+                @forelse ($hotel->rooms as $room)
                 <div class="item-card flex flex-row justify-between items-center">
                     <div class="flex flex-row items-center gap-x-3">
-                        <img src=" " alt="" class="rounded-2xl object-cover w-[120px] h-[90px]">
+                        <img src="{{Storage::url($room->photo)}}" alt="" class="rounded-2xl object-cover w-[120px] h-[90px]">
                         <div class="flex flex-col">
                             <h3 class="text-indigo-950 text-xl font-bold">
-                                asdasd adsada
+                                {{$room->name}}
                             </h3>
-                        <p class="text-slate-500 text-sm">
-                            12 people
-                        </p>
+                            <p class="text-slate-500 text-sm">
+                                {{$room->total_people}}
+                            </p>
                         </div>
                     </div> 
                     <div  class="hidden md:flex flex-col">
                         <p class="text-slate-500 text-sm">Price</p>
                         <h3 class="text-indigo-950 text-xl font-bold">
-                            Rp 1/night
+                            Rp {{number_format($room->price,0,',','.')}}/night
                         </h3>
                     </div>
                     <div class="hidden md:flex flex-row items-center gap-x-3">
@@ -104,7 +106,12 @@
                         </form>
                     </div>
                 </div> 
-
+                
+            @empty
+            <p>Belum ada data kamar terbaru</p>
+                
+            @endforelse
+                
             </div>
         </div>
     </div>
