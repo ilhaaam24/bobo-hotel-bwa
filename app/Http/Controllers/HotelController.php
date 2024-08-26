@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreHotelRequest;
+use App\Http\Requests\UpdateHotelRequest;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Hotel;
@@ -80,14 +81,41 @@ class HotelController extends Controller
     public function edit(Hotel $hotel)
     {
         //
+        $countries = Country::orderByDesc('id')->get();
+        $cities = City::orderByDesc('id')->get();
+        $latestPhotos = $hotel->photos()->orderByDesc('id')->take(3)->get();
+        return view('admin.hotels.edit',compact('hotel', 'countries', 'cities', 'latestPhotos'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Hotel $hotel)
+    public function update(UpdateHotelRequest $request, Hotel $hotel)
     {
         //
+        DB::transaction(function ()  use ($request, $hotel){
+            $validate = $request->validated();
+
+            if($request->hasFile('thumbnail')){
+                $thumbnailPath = 
+                $request->file('thumbnail')->store('thumbnails/' . date('Y/m/d'), 'public');
+                $validate['thumbnail'] = $thumbnailPath;
+            }
+
+            $validate['slug'] = Str::slug($validate['name']);
+            
+            $hotel->update($validate);
+
+            if($request->hasFile('photos')){
+                foreach ($request->file('photos') as $photo) {
+                    $photoPath = $photo->store('photos/' . date('Y/m/d'), 'public');
+                    $hotel->photos()->create([
+                        'photo' => $photoPath
+                    ]);
+                }
+            }
+        });
+        return redirect()->route('admin.hotels.index');
     }
 
     /**
@@ -95,6 +123,9 @@ class HotelController extends Controller
      */
     public function destroy(Hotel $hotel)
     {
-        //
+        DB::transaction(function() use ($hotel){
+            $hotel->delete();
+        });
+        return redirect()->route('admin.hotels.index');
     }
 }
