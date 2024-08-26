@@ -65,9 +65,16 @@ class CityController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, City $city)
+    public function update(StoreCityRequest $request, City $city)
     {
         //
+        DB::transaction(function() use ($request, $city){
+            $validated = $request->validated();
+            $validated['slug'] = Str::slug($validated['name']);
+            $city->update($validated);
+        });
+
+        return redirect()->route('admin.cities.index');
     }
 
     /**
@@ -76,5 +83,10 @@ class CityController extends Controller
     public function destroy(City $city)
     {
         //
+        DB::transaction(function() use ($city){
+            $city->delete();
+        });
+
+        return redirect()->route('admin.cities.index');
     }
 }
