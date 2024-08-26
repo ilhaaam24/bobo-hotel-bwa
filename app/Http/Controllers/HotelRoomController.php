@@ -77,8 +77,13 @@ class HotelRoomController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(HotelRoom $hotelRoom)
+    public function destroy(Hotel $hotel, HotelRoom $hotelRoom)
     {
         //
+        DB::transaction(function() use ($hotelRoom, $hotel){
+            $hotelRoom->delete();
+        });
+
+        return redirect()->route('admin.hotels.show', $hotel->id);
     }
 }
