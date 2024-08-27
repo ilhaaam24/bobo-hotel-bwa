@@ -1,19 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="{{asset('output.css')}}" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  
-</head>
-<body class="font-poppins text-[#070625]">
-  <section id="content" class="max-w-[640px] w-full min-h-screen mx-auto flex flex-col bg-white overflow-x-hidden relative">
-    <div class="w-full h-[230px] flex shrink-0 overflow-hidden">
-      <img src="assets/images/backgrounds/signup-bg.png" class="w-full h-full object-cover" alt="background">
+@extends('../layouts/master')
+@section('content')
+    
+<section id="content" class="max-w-[640px] w-full min-h-screen mx-auto flex flex-col bg-white overflow-x-hidden relative">
+  <div class="w-full h-[230px] flex shrink-0 overflow-hidden">
+    <img src="assets/images/backgrounds/signup-bg.png" class="w-full h-full object-cover" alt="background">
     </div>
     <form method="POST" action="{{route('register')}}" enctype="multipart/form-data" class="flex flex-col justify-between flex-1 px-[18px] pt-8 pb-6">
-        @csrf
+      @csrf
       <div class="flex flex-col gap-8">
         <div class="flex flex-col gap-1">
           <h1 class="font-semibold text-2xl leading-[36px]">Create Your Account 🙌🏻 </h1>
@@ -117,7 +110,9 @@
       <p class="font-medium text-sm leading-[21px] text-[#757C98] text-center mt-3">Already have an account? <a href="{{route('login')}}" class="font-semibold text-[#4041DA]">Sign In</a></p>
     </form>
   </section>
+  @endsection
 
+  @push('after-scripts')
+      
   <script src="{{asset('js/file-upload.js')}}"></script>
-</body>
-</html>
+  @endpush
