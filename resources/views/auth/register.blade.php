@@ -12,7 +12,7 @@
     <div class="w-full h-[230px] flex shrink-0 overflow-hidden">
       <img src="assets/images/backgrounds/signup-bg.png" class="w-full h-full object-cover" alt="background">
     </div>
-    <form method="POST" action="{{route('login')}}" enctype="multipart/form-data" class="flex flex-col justify-between flex-1 px-[18px] pt-8 pb-6">
+    <form method="POST" action="{{route('register')}}" enctype="multipart/form-data" class="flex flex-col justify-between flex-1 px-[18px] pt-8 pb-6">
         @csrf
       <div class="flex flex-col gap-8">
         <div class="flex flex-col gap-1">
@@ -35,7 +35,7 @@
                 </div>
                 <p id="Filename" class="font-semibold text-sm leading-[21px] text-[#757C98] group-has-[:valid]:text-[#070625] group-has-[:invalid]:font-medium line-clamp-1">Upload Image</p>
               </div>
-              <input type="file" name="avatar" id="fileInput" class="hidden" required>
+              <input  type="file" name="avatar" id="fileInput" class="hidden" required>
               <button type="button" class="font-semibold text-xs leading-[18px] text-[#4041DA]" onclick="document.getElementById('fileInput').click()">Choose File</button>
             </div>
           </div>
@@ -118,6 +118,6 @@
     </form>
   </section>
 
-  <script src="js/file-upload.js"></script>
+  <script src="{{asset('js/file-upload.js')}}"></script>
 </body>
 </html>
