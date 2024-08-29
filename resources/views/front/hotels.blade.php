@@ -13,7 +13,8 @@
         </div>
       </a>
     </div>
-    <form action="hotel-result.html" class="bg-white p-4 flex flex-col gap-6 rounded-xl">
+    <form action="{{route('front.search.hotels')}}" method="POST" class="bg-white p-4 flex flex-col gap-6 rounded-xl">
+      @csrf
       <div class="input-container flex flex-col gap-4">
         <p class="font-semibold">Search Hotel</p>
         <div class="group flex items-center gap-2 p-[12px_16px] border border-[#DCDFE6] rounded-lg overflow-hidden">
@@ -26,7 +27,7 @@
               <path d="M15.7305 6.62V20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>                  
           </div>
-          <input type="text" name="" id="" class="appearance-none outline-none w-full bg-white placeholder:text-[#757C98] placeholder:font-medium text-sm font-semibold" placeholder="Hotel name, city, etc" required>
+          <input type="text" name="keyword" id="" class="appearance-none outline-none w-full bg-white placeholder:text-[#757C98] placeholder:font-medium text-sm font-semibold" placeholder="Hotel name, city, etc" required>
           <button type="button" class="w-6 h-6 flex shrink-0 group-has-[:invalid]:text-[#757C98]">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 19.5C16.1421 19.5 19.5 16.1421 19.5 12C19.5 7.85786 16.1421 4.5 12 4.5C7.85786 4.5 4.5 7.85786 4.5 12C4.5 16.1421 7.85786 19.5 12 19.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -60,7 +61,7 @@
             <button type="button" class="checkInBtn w-full text-left text-sm text-[#757C98] !leading-[21px] font-medium relative z-10" onclick="handleDateButtonClick('checkIn')">
               dd/mm/yyyy
             </button>
-            <input type="date" name="" id="checkIn" class="opacity-0 absolute bottom-0" required>
+            <input type="date" name="checkin_at" id="checkIn" class="opacity-0 absolute bottom-0" required>
           </div>
         </div>
         <div class="input-container flex flex-col gap-4">
@@ -82,7 +83,7 @@
             <button type="button" class="checkOutBtn w-full text-left text-sm text-[#757C98] !leading-[21px] font-medium relative z-10" onclick="handleDateButtonClick('checkOut')">
               dd/mm/yyyy
             </button>
-            <input type="date" name="" id="checkOut" class="opacity-0 absolute bottom-0" required>
+            <input type="date" name="checkout_at" id="checkOut" class="opacity-0 absolute bottom-0" required>
           </div>
         </div>
       </div>
