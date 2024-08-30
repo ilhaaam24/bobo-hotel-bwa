@@ -21,7 +21,7 @@
         <a href="hotel-details.html">
           <div class="card-result bg-white rounded-xl overflow-hidden flex flex-col">
             <div class="thumbnail-container w-full aspect-[357/160] overflow-hidden flex shrink-0">
-              <img src="{{asset('assets//images/thumbnails/thumbnail-result-1.png')}}" class="object-cover w-full h-full" alt="thumbnail">
+              <img src="{{Storage::url($hotel->thumbnail)}}" class="object-cover w-full h-full" alt="thumbnail">
             </div>
             <div class="content-container flex flex-col p-4 gap-6">
               <div class="details-container flex flex-col gap-[6px]">
@@ -69,7 +69,7 @@
                 </div>
               </div>
               <div class="total-price flex gap-[2px] items-center">
-                <p class="text-[#54A917] font-semibold text-lg leading-[27px]">Rp1.310.000</p>
+                <p class="text-[#54A917] font-semibold text-lg leading-[27px]">Rp {{number_format($hotel->getLowesRoomPrice(),0,',','.')}}</p>
                 <p class="text-[#757C98] font-semibold text-xs leading-[18px]">/night</p>
               </div>
             </div>
