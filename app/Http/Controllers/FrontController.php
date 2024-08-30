@@ -40,5 +40,10 @@ class FrontController extends Controller
 
         return view('front.list_hotels', compact('keyword','hotels'));
     }
+    public function hotels_details(Hotel $hotel){
+        $latestPhotos = $hotel->photos()->orderByDesc('id')->take(3)->get();
+        return view('front.hotel_details', compact('hotel', 'latestPhotos'));
     }
+
+}
 
