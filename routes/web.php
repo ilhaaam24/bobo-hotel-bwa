@@ -14,7 +14,7 @@ Route::get('/hotels', [FrontController::class, 'hotels'])->name('front.hotels');
 Route::post('/hotels/search', [FrontController::class, 'search_hotels'])->name('front.search.hotels');
 Route::get('/hotels/list/{keyword}', [FrontController::class, 'list_hotels'])->name('front.hotels.list');
 Route::get('/hotels/details/{hotel:slug}', [FrontController::class, 'hotels_details'])->name('front.hotels.details');
-Route::get('/hotels/details/{hotel:slug}/rooms', [FrontController::class, 'hotels_details'])->name('front.hotels.rooms');
+Route::get('/hotels/details/{hotel:slug}/rooms', [FrontController::class, 'hotel_rooms'])->name('front.hotels.rooms');
 
 
 Route::get('/dashboard', function () {
@@ -25,6 +25,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+    Route::middleware('can:checkout hotels')->group(function () {
+        Route::post('/hotels/{hotel:slug}/{hotel_room}/book', [FrontController::class, 'hotel_room_book'])->name('front.hotel.room.book');
+        Route::get('/hotels/payment/{hotel_booking}/', [FrontController::class, 'hotel_payment'])->name('front.hotel.book.payment');
+        Route::put('/hotels/payment/{hotel_booking}/store', [FrontController::class, 'hotel_payment_store'])->name('front.hotel.book.paymen.store');
+        Route::get('/book/finish/', [FrontController::class, 'hotel_book_finish'])->name('front.book_finish');
+    });
 
     Route::prefix('admin')->name('admin.')->group(function(){
         Route::middleware('can:manage cities')->group(function () {

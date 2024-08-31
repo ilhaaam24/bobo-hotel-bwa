@@ -1,6 +1,7 @@
 @extends('../layouts/master')
 @section('content')
-    
+
+  
   <section id="content" class="max-w-[640px] w-full min-h-screen mx-auto flex flex-col bg-[#F8F8F8] overflow-x-hidden pb-[122px] relative">
     <div id="Top-bar" class="absolute z-10 top-[60px] left-[18px]">
       <a href="{{route('front.hotels')}}" class="">
@@ -12,16 +13,14 @@
     <div id="Details-content" class="flex flex-col">
       <header class="flex flex-col">
         <div id="thumbnail-container" class="grid grid-cols-3 gap-[3px]">
-          <a id="Main-thumbnail" href="{{asset('assets/images/thumbnails/thumbnail-detail-1.png')}}" class="col-span-3 glightbox w-full aspect-[393/247] overflow-hidden" data-gallery="gallery1" >
-            <img src="{{Storage::url($hotel->thumbnail)}}" class="object-cover w-full h-full" alt="thumbnail">
+          <a id="Main-thumbnail" href="{{asset('assets//images/thumbnails/thumbnail-detail-1.png')}}" class="col-span-3 glightbox w-full aspect-[393/247] overflow-hidden" data-gallery="gallery1" >
+            <img src="{{asset('assets/images/thumbnails/thumbnail-detail-1.png')}}" class="object-cover w-full h-full" alt="thumbnail">
           </a>
-          @foreach ($latestPhotos as $photo)
-              
-          <a href="{{Storage::url($photo->photo)}}" class="glightbox w-full aspect-[129/90] overflow-hidden" data-gallery="gallery1" >
-            <img src="{{Storage::url($photo->photo)}}" class="object-cover w-full h-full" alt="thumbnail">
-          </a>
-          @endforeach
-         
+            @foreach ($latestPhotos as $photo)
+            <a href="{{Storage::url($photo->photo)}}" class="glightbox w-full aspect-[129/90] overflow-hidden" data-gallery="gallery1" >
+              <img src="{{Storage::url($photo->photo)}}" class="object-cover w-full h-full" alt="thumbnail">
+            </a>
+            @endforeach
         </div>
         <div id="Hotel-info" class="bg-white p-[24px_18px] flex flex-col gap-2">
           <div id="Hotel-rating" class="flex items-center gap-[6px]">
@@ -255,7 +254,7 @@
           <a id="map-link" href="" target="_blank" class="font-semibold text-sm leading-[21px] text-[#4041DA]">See Map</a>
         </div>
         <div id="embed-map-display" class="w-full aspect-[357/180] overflow-hidden">
-            <iframe id="map-iframe" class="w-full h-full z-0" frameborder="0" src="https://www.google.com/maps/embed?{{$hotel->link_gmaps}}"></iframe>
+            <iframe id="map-iframe" class="w-full h-full z-0" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q={{$hotel->name}}&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
         </div>
         <p class="font-medium text-xs leading-[18px] text-[#757C98]">{{$hotel->address}}</p>
       </div>
@@ -263,27 +262,29 @@
     <div id="Price-bar" class="fixed bottom-[24px] px-[18px] max-w-[640px] w-full z-30">
       <div class="bg-white p-4 pl-6 rounded-full flex items-center justify-between shadow-[0_8px_30px_0_#0A093212]">
         <div class="price-info flex flex-col gap-[2px]">
-          <p class="font-semibold text-lg leading-[27px] text-[#54A917]">Rp  {{number_format($hotel->getLowesRoomPrice(),0,',','.')}}</p>
+          <p class="font-semibold text-lg leading-[27px] text-[#54A917]">Rp {{number_format($hotel->getLowesRoomPrice(),0,',','.')}}</p>
           <p class="font-semibold text-xs leading-[18px] text-[#757C98]">/night</p>
         </div>
-        <a href="hotel-rooms-type.html" class="w-[138px] h-[48px] bg-[#4041DA] p-[12px_24px] rounded-full text-nowrap text-white font-semibold text-sm leading-[21px] flex items-center justify-center">Select Room</a>
+        <a href="{{route('front.hotels.rooms',$hotel)}}" class="w-[138px] h-[48px] bg-[#4041DA] p-[12px_24px] rounded-full text-nowrap text-white font-semibold text-sm leading-[21px] flex items-center justify-center">Select Room</a>
       </div>
     </div>
   </section>
-
 @endsection
 @push('after-styles')
     
+<!-- CSS -->
 <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
 @endpush
 
 @push('after-scripts')
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+    
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
 
-  <script src="js/hotel-details.js"></script>
-  <script src="js/carousel.js"></script>
-  <script src="js/map.js"></script>
+<script src="{{asset('js/hotel-details.js')}}"></script>
+<script src="{{asset('js/carousel.js')}}"></script>
+<script src="{{asset('js/map.js')}}"></script>
 @endpush
