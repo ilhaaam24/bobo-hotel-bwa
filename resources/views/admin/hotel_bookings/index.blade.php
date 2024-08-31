@@ -13,13 +13,13 @@
                 @forelse ($hotel_bookings as $booking)
                 <div class="item-card flex flex-row justify-between items-center">
                     <div class="flex flex-row items-center gap-x-3">
-                        <img src="{{Storage::url($booking->hotel->image)}} " alt="" class="rounded-2xl object-cover w-[120px] h-[90px]">
+                        <img src="{{Storage::url($booking->hotel->thumbnail)}} " alt="" class="rounded-2xl object-cover w-[120px] h-[90px]">
                         <div class="flex flex-col">
                             <h3 class="text-indigo-950 text-xl font-bold">
                                 {{$booking->hotel->name}}
                             </h3>
                             <p class="text-slate-500 text-sm">
-                                {{$boking->hotel->city->name}}, {{$booking->hotel->country->name}}
+                                {{$booking->hotel->city->name}}, {{$booking->hotel->country->name}}
                             </p>
                         </div>
                     </div> 
@@ -30,19 +30,19 @@
                         </h3>
                     </div>
                     <div  class="hidden md:flex flex-col">
-                        <p class="text-slate-500 text-sm">Total Days</p>
+                        <p class="text-slate-500 text-sm">Total Night</p>
                         <h3 class="text-indigo-950 text-xl font-bold">
                             {{number_format($booking->total_days, 0, '.', '.')}}
                         </h3>
                     </div>
                     <div  class="hidden md:flex flex-col">
-                        <p class="text-slate-500 text-sm">Price</p>
+                        <p class="text-slate-500 text-sm">Total Price</p>
                         <h3 class="text-indigo-950 text-xl font-bold">
-                           {{number_format($booking->total_amount, 0, '.', '.')()}}/night
+                           {{number_format($booking->total_amount, 0, '.', '.')}} /night
                         </h3>
                     </div>
                     <div class="hidden md:flex flex-row items-center gap-x-3">
-                        <a href=" {{routez('admin.hotel_bookings.show', $booking)}}" class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
+                        <a href=" {{route('admin.hotel_bookings.show', $booking)}}" class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
                             Manage
                         </a>
                     </div>

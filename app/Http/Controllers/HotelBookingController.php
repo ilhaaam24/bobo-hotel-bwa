@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\HotelBooking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HotelBookingController extends Controller
 {
@@ -38,6 +39,7 @@ class HotelBookingController extends Controller
     public function show(HotelBooking $hotelBooking)
     {
         //
+        return view('admin.hotel_bookings.show',compact('hotelBooking'));
     }
 
     /**
@@ -51,9 +53,15 @@ class HotelBookingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, HotelBooking $hotelBooking)
+    public function update(Request $request, HotelBooking $hotel_booking)
     {
         //
+        DB::transaction(function() use ( $hotel_booking){
+           $hotel_booking->update([
+            'is_paid' => true
+           ]) ;
+        });
+        return redirect()->route('admin.hotel_bookings.show', compact('hotel_booking'));
     }
 
     /**
