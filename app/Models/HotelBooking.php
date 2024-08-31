@@ -20,6 +20,11 @@ class HotelBooking extends Model
         'is_paid',
         'proof',
     ];
+
+    protected $casts = [
+        'checkin_at' => 'date',
+        'checkout_at' => 'date',
+    ];
     public function customer(){
         return $this->belongsTo(User::class, 'user_id');
         

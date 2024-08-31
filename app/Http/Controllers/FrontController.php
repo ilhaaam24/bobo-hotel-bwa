@@ -98,5 +98,28 @@ class FrontController extends Controller
 
     }
 
+    public function hotel_payment(HotelBooking $hotel_booking){
+        $user = Auth::user();
+        return view('front.book_payment', compact('hotel_booking', 'user' ));
+    }
+    public function hotel_payment_store(StorePaymentBookingRequest $request, HotelBooking $hotel_booking){
+        $user = Auth::user();
+        if($hotel_booking->user_id != $user->id){
+            abort(403);
+        }
+
+        DB::transaction( function() use ($request, $hotel_booking){
+            $validated = $request->validated();
+            
+            if($request->hasFile('proof')){
+                $proofPath = $request->file('proof')->store('proofs', 'public');
+                $validated['proof'] = $proofPath;
+            }
+
+            $hotel_booking->update($validated);
+
+            return  redirect()->route('front.book_finish');
+        });
+    }
 }
 
