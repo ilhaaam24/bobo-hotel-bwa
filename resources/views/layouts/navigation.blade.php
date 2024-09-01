@@ -37,7 +37,7 @@
                     </x-nav-link>
                     @endcan
                     @can('view hotel bookings')
-                    <x-nav-link :href="route('admin.hotel_bookings.index')" :active="request()->routeIs('admin.hotel_bookings.index')">
+                    <x-nav-link :href="route('dashboard.my-bookings')" :active="request()->routeIs('admin.hotel_bookings.index')">
                         {{ __('My Bookings') }}
                     </x-nav-link>
                     @endcan

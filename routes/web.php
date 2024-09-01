@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\HotelBookingController;
 use App\Http\Controllers\HotelController;
@@ -15,6 +16,7 @@ Route::post('/hotels/search', [FrontController::class, 'search_hotels'])->name('
 Route::get('/hotels/list/{keyword}', [FrontController::class, 'list_hotels'])->name('front.hotels.list');
 Route::get('/hotels/details/{hotel:slug}', [FrontController::class, 'hotels_details'])->name('front.hotels.details');
 Route::get('/hotels/details/{hotel:slug}/rooms', [FrontController::class, 'hotel_rooms'])->name('front.hotels.rooms');
+
 
 
 Route::get('/dashboard', function () {
@@ -32,6 +34,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/hotels/payment/{hotel_booking}/', [FrontController::class, 'hotel_payment'])->name('front.hotel.book.payment');
         Route::put('/hotels/payment/{hotel_booking}/store', [FrontController::class, 'hotel_payment_store'])->name('front.hotel.book.payment.store');
         Route::get('/book/finish/', [FrontController::class, 'hotel_book_finish'])->name('front.book_finish');
+    });
+    Route::middleware('can:view hotel bookings')->group(function () {
+        Route::get('/dashboard/my-bookings', [DashboardController::class, 'my_bookings'])->name('dashboard.my-bookings');
+
     });
 
     Route::prefix('admin')->name('admin.')->group(function(){

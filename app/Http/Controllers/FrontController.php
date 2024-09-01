@@ -121,5 +121,6 @@ class FrontController extends Controller
             return  redirect()->route('front.book_finish');
         });
     }
+    
 }
 
