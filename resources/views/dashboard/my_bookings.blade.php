@@ -32,7 +32,7 @@
           <hr class="border-[#DCDFE6]">
           <div class="hotel-details flex items-center gap-3 px-4">
             <div class="thumbnail-container w-[100px] h-[120px] flex shrink-0 rounded-xl overflow-hidden">
-              <img src="{{asset('assets/images/thumbnails/thumbnail-room-2.png')}}" class="object-cover w-full h-full" alt="thumbnail">
+              <img src="{{Storage::url($booking->hotel->thumbnail)}}" class="object-cover w-full h-full" alt="thumbnail">
             </div>
             <div class="hotel-info flex flex-col gap-[6px] h-fit">
               <div class="ratings-container flex items-center gap-[2px]">
@@ -76,7 +76,7 @@
               </div>
             </div>
           </div>
-          <a href="order-details-pending.html" class="flex items-center justify-center font-semibold p-[12px_24px] rounded-lg h-12 bg-[#4041DA17] text-[#4041DA] m-4 mt-0">Booking Details</a>
+          <a href="{{route('dashboard.booking_details',$booking)}}" class="flex items-center justify-center font-semibold p-[12px_24px] rounded-lg h-12 bg-[#4041DA17] text-[#4041DA] m-4 mt-0">Booking Details</a>
         </div>
         @empty
             <p>Belum ada data booking</p>
@@ -85,7 +85,7 @@
     </div>
     <div id="Menu-bar" class="fixed bottom-[24px] px-[18px] max-w-[640px] w-full z-30">
       <div class="bg-white p-[14px_12px] rounded-full flex items-center justify-center gap-8 shadow-[0_8px_30px_0_#0A093212]">
-        <a href="index.html">
+        <a href="{{route('front.index')}}">
           <div class="flex flex-col gap-1 items-center">
             <div class="w-6 h-6 flex shrink-0">
               <img src="{{asset('assets/images/icons/home-nonactive.svg')}}" alt="icon">
@@ -101,7 +101,7 @@
             <p class="text-xs leading-[18px] font-medium text-[#757C98]">Search</p>
           </div>
         </a>
-        <a href="">
+        <a href="{{ route('dashboard.my-bookings')}}">
           <div class="flex flex-col gap-1 items-center">
             <div class="w-6 h-6 flex shrink-0">
               <img src="{{asset('assets/images/icons/activity-active.svg')}}" alt="icon">
@@ -109,7 +109,7 @@
             <p class="text-xs leading-[18px] font-medium text-[#4041DA]">Activity</p>
           </div>
         </a>
-        <a href="">
+        <a href="{{route('dashboard')}}">
           <div class="flex flex-col gap-1 items-center">
             <div class="w-6 h-6 flex shrink-0">
               <img src="{{asset('assets/images/icons/settings-nonactive.svg')}}" alt="icon">
