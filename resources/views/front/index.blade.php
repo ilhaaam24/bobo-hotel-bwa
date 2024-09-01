@@ -7,10 +7,10 @@
       <img src="assets/images/backgrounds/BG.png" class="absolute object-cover w-full h-full" alt="backgrounds">
       <div class="fixed top-0 w-full max-w-[640px] px-[18px] z-30">
         <nav class="bg-white p-[10px_16px] h-fit w-full flex items-center justify-between rounded-full shadow-[0_8px_30px_0_#0A093212] z-10 mt-[60px]">
-          <a href="signup.html">
+          <a href="{{route('dashboard')}}">
             <div class="w-[54px] h-[54px] flex shrink-0 overflow-hidden rounded-full items-center justify-center">
               @guest
-                <img src="assets/images/icons/user.svg" class="w-full h-full object-cover" alt="icon">
+                <img src="{{asset('assets/images/icons/user.svg')}}" class="w-full h-full object-cover" alt="icon">
               @endguest
               @auth
                   

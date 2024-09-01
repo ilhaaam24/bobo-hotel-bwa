@@ -8,7 +8,7 @@
     </div>
     <div class="relative z-10 flex flex-col gap-6 mt-[60px]">
       <div class="top-menu flex justify-between items-center px-[18px]">
-        <a href="hotel-rooms-type.html" class="">
+        <a href="{{route('front.hotels.rooms', $hotel_booking->hotel)}}" class="">
           <div class="w-[42px] h-[42px] flex shrink-0">
             <img src="{{asset('assets/images/icons/back.svg')}}" alt="icon">
           </div>
@@ -25,7 +25,7 @@
             <button type="button" class="contact-name accordion-button flex items-center gap-2 w-full" data-accordion="accordion-1">
               <div class="flex items-center">
                 <div class="w-12 h-12 flex shrink-0 rounded-full overflow-hidden">
-                  <img src="{{asset('assets/images/photos/pic3.png')}}" class="object-cover w-full h-full" alt="photo">
+                  <img src="{{Storage::url($user->avatar)}}" class="object-cover w-full h-full" alt="photo">
                 </div>
               </div>
               <div class="flex flex-col flex-1 gap-[2px] text-left">

@@ -118,8 +118,11 @@ class FrontController extends Controller
 
             $hotel_booking->update($validated);
 
-            return  redirect()->route('front.book_finish');
         });
+        return redirect()->route('front.book_finish');
+    }
+    public function hotel_book_finish(){
+        return view('front.booking_finish');
     }
     
 }

@@ -119,7 +119,7 @@
         </div>
         <div id="Bottom-nav" class="fixed bottom-0 w-full max-w-[640px] flex flex-col p-[24px_18px] border-t border-[#DCDFE6] gap-4 bg-white">
           <a href="" class="flex items-center justify-center font-semibold p-[12px_24px] rounded-lg w-full h-12 bg-[#4041DA] text-white">Contact Customer Service</a>
-          <a href="home-login.html" class="flex items-center justify-center font-semibold p-[12px_24px] rounded-lg w-full h-12 bg-[#4041DA17] text-[#4041DA]">Back to Homepage</a>
+          <a href="{{route('front.index')}}" class="flex items-center justify-center font-semibold p-[12px_24px] rounded-lg w-full h-12 bg-[#4041DA17] text-[#4041DA]">Back to Homepage</a>
         </div>
       </div>
     </div>
